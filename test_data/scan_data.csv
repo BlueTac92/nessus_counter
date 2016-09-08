@@ -1,0 +1,13 @@
+hostname,severity,name,id
+hotserver001,high,poodle,123456
+hotserver002,high,poodle,123456
+hotserver003,high,poodle,123456
+hotserver004,high,poodle,123456
+hotserver005,high,poodle,123456
+hotserver006,high,poodle,123456
+hotserver007,high,poodle,123456
+hotserver008,high,poodle,123456
+hotserver009,high,poodle,123456
+hotserver010,high,poodle,123456
+hotserver010,medium,gcc,122376
+hotserver910,critical,glib-xyz,124756
