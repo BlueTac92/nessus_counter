@@ -1,6 +1,5 @@
 import csv
 
-
 print('----------------------------------')
 print('     Nessus counting tool')
 print('----------------------------------')
