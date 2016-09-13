@@ -4,7 +4,7 @@ import csv
 print('----------------------------------')
 print('     Nessus counting tool')
 print('')
-print('     GPU 2016')
+print('     GPLv3 2016')
 print('')
 print('')
 print('     by John Brown')
@@ -21,11 +21,17 @@ print('----------------------------------')
 
 nessus_report = "./test_data/scan_data.csv"
 
+# not exactly the right idea for lists, but consider converting to a list value
+sev = ['critical', 'high', 'medium', 'low']
+
 critical = 0
 high = 0
 medium = 0
 low = 0
 
+
+# if are repeated a lot, get rid of this shit
+#
 
 with open(nessus_report, newline='') as csvfile:
     vulns = csv.DictReader(csvfile)
@@ -38,7 +44,7 @@ with open(nessus_report, newline='') as csvfile:
             medium = medium + 1
         if row['severity'] == "low":
             low = low + 1
-       
+
 print ('Total vulnerablilities')
 print ('----------------------------------')
 print ('Critical:   %i' % critical)
