@@ -16,11 +16,12 @@ print('----------------------------------')
 #print ("Default Output Path: %s" % outputPath)
 #
 
-nessus_report = "Monthly_Scheduled_Site_1_BE_Scan_idi7p6.csv"
+nessus_report = "test_data/scan_data.csv"
 
 # not exactly the right idea for lists, but consider converting to a list value
 sev = ['critical', 'high', 'medium', 'low']
-
+ 
+totalVulns = []
 uniqueVulns = []
 critHosts = []
 highHosts = []
@@ -33,6 +34,7 @@ high = 0
 medium = 0
 low = 0
 none = 0
+counter = 0
 
 # Get a total count of each criticality
 # if are repeated a lot, get rid of this shit
@@ -41,15 +43,15 @@ with open(nessus_report, newline='') as csvfile:
     report = csv.DictReader(csvfile)
     for row in report:
         if row['Risk'] == "Critical":
-            critical = critical + 1
+            critical += 1
         if row['Risk'] == "High":
-            high = high + 1
+            high += 1
         if row['Risk'] == "Medium":
-            medium = medium + 1
+            medium += 1
         if row['Risk'] == "Low":
-            low = low + 1
+            low += 1
         if row['Risk'] == "None":
-            low = low + 1
+            low += 1
 
 print ('Total vulnerablilities')
 print ('----------------------------------')
@@ -70,10 +72,35 @@ print ('----------------------------------')
 print('Total number of uniq vulnerablilities: ' + str(len(uniqueVulns)))
 print ('----------------------------------')
 
+#print(uniqueVulns)
+# Count occurances of each vuln
 
 
 
+with open(nessus_report, newline='') as csvfile:
+    report = csv.DictReader(csvfile)
+    for row in report:
+        totalVulns.append(row['Name'])
+
+print('Total number of vulnerablilities: ' + str(len(totalVulns)))
+print ('----------------------------------')
+
+print('Uniq Vulnerabilities: ' + str(len(set(totalVulns))))
+
+for vuln in uniqueVulns:
+    for x in totalVulns:
+        if x == vuln:
+            counter =+ 1
+    print(vuln + ' = ' + str(counter))
 
 
 
-       # print(row['hostname'], row['id'])
+#for x in totalVulns:
+#    print(x)
+
+
+
+            
+    
+   
+        # print(row['hostname'], row['id'])
