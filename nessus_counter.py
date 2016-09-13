@@ -1,4 +1,5 @@
 import csv
+from collections import Counter
 
 print('----------------------------------')
 print('     Nessus counting tool')
@@ -53,7 +54,7 @@ with open(nessus_report, newline='') as csvfile:
         if row['Risk'] == "None":
             low += 1
 
-print ('Total vulnerablilities')
+print ('Vulnerablilities by Criticality: ')
 print ('----------------------------------')
 print ('Critical:   %i' % critical)
 print ('High:       %i' % high)
@@ -61,42 +62,27 @@ print ('Medium:     %i' % medium)
 print ('Low:        %i' % low)
 print ('None:       %i' % none)
 
-# Count total number of unique vulnerablilities
-
-with open(nessus_report, newline='') as csvfile:
-    report = csv.DictReader(csvfile)
-    for row in report:
-        if row['Name'] not in uniqueVulns:
-            uniqueVulns.append(row['Name'])
-print ('----------------------------------')
-print('Total number of uniq vulnerablilities: ' + str(len(uniqueVulns)))
-print ('----------------------------------')
-
-#print(uniqueVulns)
-# Count occurances of each vuln
-
-
-
 with open(nessus_report, newline='') as csvfile:
     report = csv.DictReader(csvfile)
     for row in report:
         totalVulns.append(row['Name'])
 
-print('Total number of vulnerablilities: ' + str(len(totalVulns)))
-print ('----------------------------------')
-
+print('----------------------------------')
+print('Total Vulnerablilities: ' + str(len(totalVulns)))
+print('----------------------------------')
 print('Uniq Vulnerabilities: ' + str(len(set(totalVulns))))
+print('----------------------------------')
+print('Occurances of each Vulnerability: ')
+print('----------------------------------')
 
-for vuln in uniqueVulns:
-    for x in totalVulns:
-        if x == vuln:
-            counter =+ 1
-    print(vuln + ' = ' + str(counter))
+#print(uniqueVulns)
+# Count occurances of each vuln
 
+count = Counter(totalVulns)
+#print(count)
 
-
-#for x in totalVulns:
-#    print(x)
+for x in set(totalVulns):
+    print(x + ': ' + str(count[x]))
 
 
 
