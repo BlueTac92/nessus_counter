@@ -17,12 +17,13 @@ print('----------------------------------')
 #print ("Default Output Path: %s" % outputPath)
 #
 
-nessus_report = "test_data/scan_data.csv"
+nessus_report = "test_data/Monthly_Scheduled_Site_1_BE_Scan_idi7p6.csv"
 
 # not exactly the right idea for lists, but consider converting to a list value
-sev = ['critical', 'high', 'medium', 'low']
- 
+sev = ['None', 'Low', 'Medium', 'High', 'Critical']
+
 totalVulns = []
+totalRisks = []
 uniqueVulns = []
 critHosts = []
 highHosts = []
@@ -37,56 +38,45 @@ low = 0
 none = 0
 counter = 0
 
-# Get a total count of each criticality
-# if are repeated a lot, get rid of this shit
-#
-with open(nessus_report, newline='') as csvfile:
-    report = csv.DictReader(csvfile)
-    for row in report:
-        if row['Risk'] == "Critical":
-            critical += 1
-        if row['Risk'] == "High":
-            high += 1
-        if row['Risk'] == "Medium":
-            medium += 1
-        if row['Risk'] == "Low":
-            low += 1
-        if row['Risk'] == "None":
-            low += 1
-
-print ('Vulnerablilities by Criticality: ')
-print ('----------------------------------')
-print ('Critical:   %i' % critical)
-print ('High:       %i' % high)
-print ('Medium:     %i' % medium)
-print ('Low:        %i' % low)
-print ('None:       %i' % none)
-
 with open(nessus_report, newline='') as csvfile:
     report = csv.DictReader(csvfile)
     for row in report:
         totalVulns.append(row['Name'])
 
-print('----------------------------------')
+with open(nessus_report, newline='') as csvfile:
+    report = csv.DictReader(csvfile)
+    for row in report:
+        totalRisks.append(row['Risk'])
+
 print('Total Vulnerablilities: ' + str(len(totalVulns)))
 print('----------------------------------')
 print('Uniq Vulnerabilities: ' + str(len(set(totalVulns))))
 print('----------------------------------')
-print('Occurances of each Vulnerability: ')
-print('----------------------------------')
+
+
 
 #print(uniqueVulns)
 # Count occurances of each vuln
 
-count = Counter(totalVulns)
+countVulns = Counter(totalVulns)
+countRisks = Counter(totalRisks)
 #print(count)
 
+#print(countedRisks)
+print('Occurances of each Criticality: ')
+print('----------------------------------')
+
+for x in set(totalRisks):
+    print(x + ': ' + str(countRisks[x]))
+print('----------------------------------')
+print('Occurances of each Vulnerability: ')
+print('----------------------------------')
 for x in set(totalVulns):
-    print(x + ': ' + str(count[x]))
+    print(x + ': ' + str(countVulns[x]))
+print('----------------------------------')
 
 
 
-            
-    
-   
+
+
         # print(row['hostname'], row['id'])
