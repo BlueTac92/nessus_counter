@@ -46,10 +46,10 @@ def main(report):
         for row in report:
             totalVulns.append(row['Name'])
     
-    with open("./reports/moooar_data.csv", newline='') as csvfile:
-        report = csv.DictReader(csvfile)
-        for row in report:
-            totalRisks.append(row['Risk'])
+#    with open(reportDirectory + report, newline='') as csvfile:
+#        report = csv.DictReader(csvfile)
+#        for row in report:
+#            totalRisks.append(row['Risk'])
     
     print('Total Vulnerablilities: ' + str(len(totalVulns)))
     print('----------------------------------')
